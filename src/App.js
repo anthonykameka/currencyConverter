@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 export default function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [loadingCurrencies, setLoadingCurrencies] = useState(false);
-  const [currency1, setCurrency1] = useState("AUD");
-  const [currency2, setCurrency2] = useState("AUD");
+  const [currency1, setCurrency1] = useState("EUR");
+  const [currency2, setCurrency2] = useState("USD");
   const [originalAmount, setOriginalAmount] = useState(0);
   const [convertedAmount, setConvertedAmount] = useState(0);
 
@@ -54,8 +54,12 @@ export default function App() {
 
   return (
     <div>
-      <input onChange={handleOriginalAmount} type="text" />
-      <select onChange={handleSelectCurrency1}>
+      <input
+        onChange={handleOriginalAmount}
+        type="text"
+        disabled={loadingCurrencies}
+      />
+      <select onChange={handleSelectCurrency1} disabled={loadingCurrencies}>
         {loadingCurrencies ? (
           <option> Loading ... </option>
         ) : (
@@ -64,7 +68,7 @@ export default function App() {
           })
         )}
       </select>
-      <select onChange={handleSelectCurrency2}>
+      <select onChange={handleSelectCurrency2} disabled={loadingCurrencies}>
         {loadingCurrencies ? (
           <option> Loading ... </option>
         ) : (
